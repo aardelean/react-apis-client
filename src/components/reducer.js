@@ -1,31 +1,30 @@
 import * as actionTypes from './actionTypes';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   loading: false,
-  persons: []
+  list: []
 };
 
-export default function reducer(state: any = initialState, action: any = {}) {
-  switch (action.type) {
-    case actionTypes.LOAD_PERSONS:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.LOAD_PERSONS_SUCCESSFULLY:
-      return {
-        ...state,
-        persons: action.data,
-        loading: false,
-      };
-    case actionTypes.LOAD_PERSONS_FAILURE:
-      return {
-        ...state,
-        message: action,
-        loading: false,
-      };
+export const PERSONS_LOAD = 'PERSONS_LOAD';
+export const PERSONS_LOAD_SUCCESSFULLY = 'PERSONS_LOAD_SUCCESSFULLY';
+export const PERSONS_LOAD_FAILURE = 'PERSONS_LOAD_FAILURE';
 
-    default:
-      return state;
-  }
-}
+const reducer = handleActions({
+  PERSONS_LOAD: (state, action) => ({
+    ...state,
+    loading: true,
+  }),
+  PERSONS_LOAD_FAILURE: (state, action) => ({
+    ...state,
+    loading: false,
+    message: action.payload,
+  }),
+  PERSONS_LOAD_SUCCESSFULLY: (state, action) => ({
+    ...state,
+    loading: false,
+    list: action.payload,
+  }),
+}, initialState);
+
+export default reducer;

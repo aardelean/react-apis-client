@@ -1,29 +1,28 @@
-import React, {PropTypes} from 'react';
-import {fetchPersons, loadPersonsSuccessfully, loadPersonsFailure} from '../actions';
-import * as actionTypes from '../actionTypes';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {doLoadPerson} from '../actions';
 import Person from './Person';
 import {connect} from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import {List} from 'material-ui/List';
 
 const propTypes = {
-  persons: PropTypes.array.isRequired,
-  triggerLoadPerson: PropTypes.func.isRequired
+  list: PropTypes.array.isRequired,
+  onLoadPerson: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  persons: state.persons.persons
+  list: getPersons(state)
 });
 const mapDispatchToProps = dispatch => ({
-  triggerLoadPerson: () => {
-    dispatch({type: actionTypes.LOAD_PERSONS});
-    return fetchPersons()
-    .then(res => dispatch(loadPersonsSuccessfully(res)))
-    .catch(err => dispatch(loadPersonsFailure(err)));
-  }
+  onLoadPerson: () => doLoadPerson(dispatch)
 });
 
-const PersonList = ({persons = [],  triggerLoadPerson}) => {
-  const personList = persons.map((item, index) => {
+const getPersons = (state) => {
+  return state.persons.list;
+};
+
+const PersonList = ({list = [],  onLoadPerson}) => {
+  const personList = list.map((item, index) => {
     return (<Person key={index} firstName={item.firstName} lastName={item.lastName} href={item._links.self.href}/>)
   });
   return (
@@ -32,7 +31,7 @@ const PersonList = ({persons = [],  triggerLoadPerson}) => {
       <List>
         {personList}
       </List>
-      <RaisedButton onTouchTap={triggerLoadPerson} label="Load Personas" />
+      <RaisedButton onTouchTap={onLoadPerson} label="Load Personas" />
     </div>
   )
 };

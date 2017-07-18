@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import Routes from './routes';
 import {
-  Route,
   Link,
 } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -43,12 +41,8 @@ const App = () => (
             <nav className="navbar">
               <div id="navMenuExample" className="navbar-menu">
                 <div className="navbar-start">
-                  <Link className="navbar-item" to="/">
-                    Home
-                  </Link>
-
-                  <Link className="navbar-item" to="/about">
-                    About
+                      <Link className="navbar-item" to="/persons">
+                    Persons
                   </Link>
                 </div>
               </div>
