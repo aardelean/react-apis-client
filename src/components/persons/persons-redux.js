@@ -1,9 +1,15 @@
 import client from 'axios';
 import { createAction, handleActions } from 'redux-actions';
 
+//  actionTypes -> consts
+
 const PERSONS_LOAD = 'PERSONS_LOAD';
 const PERSONS_LOAD_SUCCESSFULLY = 'PERSONS_LOAD_SUCCESSFULLY';
 const PERSONS_LOAD_FAILURE = 'PERSONS_LOAD_FAILURE';
+
+// actions ->definition of actions, export only the necessary one preffixed by 'do'
+//  to be used in react component
+
 const PERSON_API = '/api/persons';
 
 const loadPersons = createAction(PERSONS_LOAD);
@@ -22,6 +28,7 @@ export const doLoadPerson = (dispatch) => {
     .catch(err => dispatch(loadPersonsFailure(err)));
 };
 
+//  reducer -> reducer part
 const initialState = {
   loading: false,
   list: [],
