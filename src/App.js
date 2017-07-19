@@ -4,21 +4,27 @@ import { Link } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
+import { reducer as formReducer } from 'redux-form'
 import { routerReducer, routerMiddleware, ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Routes from './routes';
 import './App.css';
-import { reducer } from './components/persons/persons-redux';
+import requestMiddleware from './requestMiddleware';
+import { reducer } from './components/persons/persons-actions';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
+const reduxRouterMiddleware = routerMiddleware(history);
+
+const middleware = [requestMiddleware(), reduxRouterMiddleware];
+
 
 const store = createStore(
   combineReducers({
     route: routerReducer,
     persons: reducer,
+    form: formReducer,
   }),
 
   composeWithDevTools(
@@ -34,7 +40,7 @@ const App = () => (
   <Provider store={store}>
     <MuiThemeProvider>
       <ConnectedRouter history={history}>
-        <div>
+        <div style={{margin: "10%"}}>
           <div className="container">
             <nav className="navbar">
               <div id="navMenuExample" className="navbar-menu">
