@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 const propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
 const DeletePersonButton = ({ onDelete }) => (
-  <div>
-    <RaisedButton onClick={onDelete} label="Delete Me" />
+  <div style={{ float: 'right' }}>
+    <FlatButton onClick={onDelete} label="Delete Me" />
   </div>
 );
 

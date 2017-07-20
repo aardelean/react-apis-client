@@ -4,16 +4,15 @@ import { ListItem } from 'material-ui/List';
 import DeletePersonButton from './DeletePersonButton';
 
 const propTypes = {
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired
+  person: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
-const Person = ({ firstName = '', lastName = '', onDelete }) => (
+const Person = ({ person = {}, onDelete }) => (
   <div>
-    <div>
+    <div style={{ margin: '10px' }}>
       <ListItem >
-        <label>{firstName + ' ' + lastName}</label>
+        <label>{person.firstName + ' ' + person.lastName}</label>
         <DeletePersonButton onDelete={onDelete} />
       </ListItem>
     </div>

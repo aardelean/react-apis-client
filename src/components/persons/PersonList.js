@@ -26,8 +26,7 @@ const PersonList = ({ list = [], onLoadPerson, onDelete }) => {
   const personList = list.map(item => (
     <Person
       key={item._links.self.href}
-      firstName={item.firstName}
-      lastName={item.lastName}
+      person={item}
       onDelete={onDelete(item._links.self.href)}
     />));
   return (

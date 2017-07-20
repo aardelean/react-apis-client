@@ -73,13 +73,11 @@ export const reducer = handleActions({
     loading: false,
     message: action.error,
   }),
-  PERSONS_LOAD_SUCCESS: (state, action) => {
-    return {
-      ...state,
-      loading: false,
-      list: action.result.data._embedded.persons,
-    };
-  },
+  PERSONS_LOAD_SUCCESS: (state, action) => ({
+    ...state,
+    loading: false,
+    list: action.result.data._embedded.persons,
+  }),
   PERSON_ADD: state => ({
     ...state,
     loading: true,
@@ -89,13 +87,11 @@ export const reducer = handleActions({
     loading: false,
     message: action.error,
   }),
-  PERSON_ADD_SUCCESS: (state, action) => {
-    return {
-      ...state,
-      loading: false,
-      list: action.result.data._embedded.persons,
-    };
-  },
+  PERSON_ADD_SUCCESS: (state, action) => ({
+    ...state,
+    loading: false,
+    list: action.result.data._embedded.persons,
+  }),
   PERSON_DELETE: state => ({
     ...state,
     loading: true,
@@ -105,11 +101,9 @@ export const reducer = handleActions({
     loading: false,
     message: action.error,
   }),
-  PERSON_DELETE_SUCCESS: (state, action) => {
-    return {
-      ...state,
-      loading: false,
-      list: action.result.data._embedded.persons,
-    };
-  },
+  PERSON_DELETE_SUCCESS: (state, action) => ({
+    ...state,
+    loading: false,
+    list: action.result.data._embedded.persons,
+  }),
 }, initialState);
